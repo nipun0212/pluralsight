@@ -1,0 +1,86 @@
+<div class="container">
+  <h3>Employee Forms </h3>
+  <form #form="ngForm" (submit)="submitForm(form)"novalidate>
+<div class="form-group">
+ <label >First Name</label>
+<input #firstName="ngModel" 
+class="form-control" [class.is-invalid]="firstName.invalid && firstName.touched" 
+ pattern="...+" 
+ type="text"
+
+  required class="form-control" placeholder="firstName"
+
+ name="firstName"
+
+      [(ngModel)]=model.firstName>
+      <div *ngIf="firstName.invalid && firstName.touched" class="alert alert-danger">
+        Fist Name is required
+      </div>
+</div>
+
+
+    <div class="form-group">
+
+      <label for="lastNameId">Last Name</label>
+      <input id="lastNameId" type="text" required class="form-control" placeholder="lastName" name="lastName" 
+      [(ngModel)]=model.lastName>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" name="is-full-time" [(ngModel)]=model.isFullTime> Full Time Employee
+      </label>
+    </div>
+ <label>Payment Type</label>
+    <div class="radio">
+      <label>
+        <input type="radio" name="paymentType" value="w2" 
+ [(ngModel)]="model.paymentType"
+
+        checked>W2
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+<input type="radio" name="paymentType" value="1099" [(ngModel)]="model.paymentType">1099
+
+      </label>
+    </div>
+
+
+
+<div class="form-group">
+
+
+<label class="control-label">Primary Language</label>
+
+<select class="form-control"
+#primaryLanguage
+[class.is-invalid]="hasPrimarylanguageError"
+ name="primaryLanguage" 
+ (blur) ="validatePrimarylanguage(primaryLanguage.value)"
+ (change)="validatePrimarylanguage(primaryLanguage.value)"
+ [(ngModel)]="model.primaryLanguage">
+<option value ="default">Select a Language...</option>
+
+<option *ngFor="let lang of languages">{{lang}}</option>
+
+  </select>
+
+
+</div> 
+
+
+<div class="form-group">
+
+  <label for="firstNameId">DATE HIRED</label>
+  <input id="firstNameId" type="date" required class="form-control" placeholder="firstName" name="name" ngModel>
+</div> 
+
+    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Ok</button>
+
+  </form>
+  {{model|json}}
+  <br>
+  Angular: {{form.value|json}}
+</div>
